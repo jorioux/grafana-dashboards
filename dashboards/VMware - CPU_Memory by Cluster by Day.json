@@ -14,19 +14,19 @@
       "type": "panel",
       "id": "flant-statusmap-panel",
       "name": "Statusmap",
-      "version": "0.0.2"
+      "version": "0.1.1"
     },
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.0.0"
+      "version": "6.2.2"
     },
     {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
-      "version": "5.0.0"
+      "version": "1.0.0"
     }
   ],
   "annotations": {
@@ -44,16 +44,18 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": null,
-  "iteration": 1552402862466,
+  "iteration": 1560176074553,
   "links": [],
   "panels": [
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 5,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
@@ -84,6 +86,7 @@
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "repeat": "TimeShift",
       "repeatDirection": "v",
       "targets": [
@@ -161,13 +164,16 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     },
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 5,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
@@ -198,6 +204,7 @@
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "repeat": "TimeShift",
       "repeatDirection": "v",
       "targets": [
@@ -275,7 +282,8 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     }
   ],
   "schemaVersion": 18,
@@ -408,5 +416,5 @@
   "timezone": "",
   "title": "VMware - CPU/Memory by Cluster by Day",
   "uid": "90DyxC9iz",
-  "version": 6
+  "version": 7
 }

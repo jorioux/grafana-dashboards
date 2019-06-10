@@ -22,13 +22,13 @@
       "type": "panel",
       "id": "flant-statusmap-panel",
       "name": "Statusmap",
-      "version": "0.0.2"
+      "version": "0.1.1"
     },
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.0.0"
+      "version": "6.2.2"
     },
     {
       "type": "panel",
@@ -40,19 +40,19 @@
       "type": "panel",
       "id": "graph",
       "name": "Graph",
-      "version": "5.0.0"
+      "version": ""
     },
     {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
-      "version": "5.0.0"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
       "id": "table",
       "name": "Table",
-      "version": "5.0.0"
+      "version": ""
     }
   ],
   "annotations": {
@@ -76,9 +76,11 @@
   "panels": [
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 3,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
@@ -86,7 +88,7 @@
         "colorScheme": "interpolateSpectral",
         "defaultColor": "#757575",
         "exponent": 0.5,
-        "max": 4,
+        "max": null,
         "min": 0.6,
         "mode": "spectrum",
         "thresholds": []
@@ -111,6 +113,7 @@
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "targets": [
         {
           "alias": "$tag_name",
@@ -170,12 +173,11 @@
           ]
         }
       ],
-      "timeFrom": "6h",
-      "title": "EWAY Homepage - Response Time over time",
+      "timeFrom": "3h",
+      "title": "Eway - Homepage",
       "tooltip": {
         "show": true
       },
-      "transparent": true,
       "type": "flant-statusmap-panel",
       "useMax": true,
       "xAxis": {
@@ -188,7 +190,8 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     },
     {
       "columns": [],
@@ -204,6 +207,7 @@
       "id": 49,
       "interval": "60s",
       "links": [],
+      "options": {},
       "pageSize": 6,
       "scroll": true,
       "showHeader": true,
@@ -330,40 +334,28 @@
         }
       ],
       "timeFrom": "2m",
-      "title": "Top VM Disk Usage",
+      "title": "Top VM Disk Throughput",
       "transform": "table",
       "type": "table"
     },
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 3,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
         "colorScale": "sqrt",
-        "colorScheme": "interpolateGnYlRd",
+        "colorScheme": "interpolateSpectral",
         "defaultColor": "#757575",
         "exponent": 0.5,
-        "mode": "discrete",
-        "thresholds": [
-          {
-            "color": "#bf1b00",
-            "tooltip": "Error code",
-            "value": "2"
-          },
-          {
-            "color": "#e5ac0e",
-            "tooltip": "Timeout",
-            "value": "1"
-          },
-          {
-            "color": "#629e51",
-            "tooltip": "200 OK",
-            "value": "0"
-          }
-        ]
+        "max": null,
+        "min": 0.6,
+        "mode": "spectrum",
+        "thresholds": []
       },
       "data": {
         "decimals": null,
@@ -378,13 +370,14 @@
       },
       "hideTimeOverride": false,
       "highlightCards": true,
-      "id": 76,
+      "id": 116,
       "interval": "10s",
       "legend": {
         "show": false
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "targets": [
         {
           "alias": "$tag_name",
@@ -417,13 +410,13 @@
             [
               {
                 "params": [
-                  "http_result"
+                  "time_total"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "max"
+                "type": "mean"
               }
             ]
           ],
@@ -437,17 +430,16 @@
               "condition": "AND",
               "key": "page",
               "operator": "=",
-              "value": "homepage"
+              "value": "cart"
             }
           ]
         }
       ],
-      "timeFrom": "6h",
-      "title": "EWAY Homepage - Status Code over time",
+      "timeFrom": "3h",
+      "title": "Eway - Cart",
       "tooltip": {
         "show": true
       },
-      "transparent": true,
       "type": "flant-statusmap-panel",
       "useMax": true,
       "xAxis": {
@@ -460,7 +452,8 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     },
     {
       "columns": [],
@@ -476,6 +469,7 @@
       "id": 72,
       "interval": "300s",
       "links": [],
+      "options": {},
       "pageSize": 4,
       "scroll": true,
       "showHeader": true,
@@ -652,19 +646,7 @@
             ]
           ],
           "slimit": "",
-          "tags": [
-            {
-              "key": "disk",
-              "operator": "!=",
-              "value": "l"
-            },
-            {
-              "condition": "AND",
-              "key": "name",
-              "operator": "!=",
-              "value": "vrops"
-            }
-          ]
+          "tags": []
         }
       ],
       "timeFrom": "10m",
@@ -673,19 +655,330 @@
       "type": "table"
     },
     {
-      "columns": [],
-      "datasource": "${DS_INFLUX-VMWARE}",
-      "fontSize": "160%",
+      "cards": {
+        "cardHSpacing": 2,
+        "cardMinWidth": 3,
+        "cardRound": null,
+        "cardSpacing": 2,
+        "cardVSpacing": 2
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateSpectral",
+        "defaultColor": "#757575",
+        "exponent": 0.5,
+        "max": null,
+        "min": 0.6,
+        "mode": "spectrum",
+        "thresholds": []
+      },
+      "data": {
+        "decimals": null,
+        "unitFormat": "short"
+      },
+      "datasource": "${DS_INFLUX-TELEGRAF}",
       "gridPos": {
-        "h": 9,
-        "w": 10,
+        "h": 6,
+        "w": 16,
         "x": 0,
         "y": 12
+      },
+      "hideTimeOverride": false,
+      "highlightCards": true,
+      "id": 117,
+      "interval": "10s",
+      "legend": {
+        "show": false
+      },
+      "links": [],
+      "nullPointMode": "as empty",
+      "options": {},
+      "targets": [
+        {
+          "alias": "$tag_name",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "eww_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "time_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "name",
+              "operator": "=~",
+              "value": "/^cqcanj.*$/"
+            },
+            {
+              "condition": "AND",
+              "key": "page",
+              "operator": "=",
+              "value": "recommendations"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "3h",
+      "title": "Eway - Recommendations",
+      "tooltip": {
+        "show": true
+      },
+      "type": "flant-statusmap-panel",
+      "useMax": true,
+      "xAxis": {
+        "labelFormat": "%a %m/%d",
+        "minBucketWidthToShowWeekends": 4,
+        "show": true,
+        "showCrosshair": true,
+        "showWeekends": true
+      },
+      "yAxis": {
+        "show": true,
+        "showCrosshair": false
+      },
+      "yAxisSort": "metrics"
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_INFLUX-VMWARE}",
+      "fontSize": "120%",
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 16
+      },
+      "hideTimeOverride": true,
+      "id": 114,
+      "interval": "",
+      "links": [],
+      "options": {},
+      "pageSize": 7,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "Virtual Machine",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "hertz"
+        },
+        {
+          "alias": "CPU (Hz)",
+          "colorMode": "cell",
+          "colors": [
+            "#3f6833",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "cpu-usagemhz",
+          "thresholds": [
+            "5000000000",
+            "8000000000"
+          ],
+          "type": "number",
+          "unit": "hertz"
+        },
+        {
+          "alias": "Memory",
+          "colorMode": "cell",
+          "colors": [
+            "#3f6833",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "mem",
+          "thresholds": [
+            "5000000",
+            "8000000"
+          ],
+          "type": "number",
+          "unit": "deckbytes"
+        },
+        {
+          "alias": "CPU (%)",
+          "colorMode": "cell",
+          "colors": [
+            "#3f6833",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "cpu-usage",
+          "thresholds": [
+            "80",
+            "95"
+          ],
+          "type": "number",
+          "unit": "percent"
+        }
+      ],
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "virtualmachine",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu_usage_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  " / 100"
+                ],
+                "type": "math"
+              },
+              {
+                "params": [
+                  "cpu-usage"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "cpu_usagemhz_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "*1000*1000"
+                ],
+                "type": "math"
+              },
+              {
+                "params": [
+                  "cpu-usagemhz"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "mem_active_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "mem"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "2m",
+      "timeShift": null,
+      "title": "Top VM CPU/Memory Usage",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_INFLUX-VMWARE}",
+      "fontSize": "150%",
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 0,
+        "y": 18
       },
       "hideTimeOverride": true,
       "id": 108,
       "interval": "60s",
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": false,
       "showHeader": true,
@@ -893,13 +1186,14 @@
         "h": 2,
         "w": 6,
         "x": 10,
-        "y": 12
+        "y": 18
       },
       "id": 106,
       "links": [],
       "mode": "time",
       "offsetFromUtc": null,
       "offsetFromUtcMinutes": null,
+      "options": {},
       "refreshSettings": {
         "syncWithDashboard": false
       },
@@ -913,311 +1207,6 @@
       "type": "grafana-clock-panel"
     },
     {
-      "cards": {
-        "cardMinWidth": 3,
-        "cardRound": null,
-        "cardSpacing": 2
-      },
-      "color": {
-        "cardColor": "#b4ff00",
-        "colorScale": "sqrt",
-        "colorScheme": "interpolateSpectral",
-        "defaultColor": "#757575",
-        "exponent": 0.5,
-        "max": 4,
-        "min": 0.6,
-        "mode": "spectrum",
-        "thresholds": []
-      },
-      "data": {
-        "decimals": null,
-        "unitFormat": "short"
-      },
-      "datasource": "${DS_INFLUX-TELEGRAF}",
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 10,
-        "y": 14
-      },
-      "hideTimeOverride": false,
-      "highlightCards": true,
-      "id": 116,
-      "interval": "10s",
-      "legend": {
-        "show": false
-      },
-      "links": [],
-      "nullPointMode": "as empty",
-      "targets": [
-        {
-          "alias": "$tag_name",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "name"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "eww_stats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "time_total"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=~",
-              "value": "/^cqcanj.*$/"
-            },
-            {
-              "condition": "AND",
-              "key": "page",
-              "operator": "=",
-              "value": "cart"
-            }
-          ]
-        }
-      ],
-      "timeFrom": "3h",
-      "title": "EWAY Cart - Response Time",
-      "tooltip": {
-        "show": true
-      },
-      "type": "flant-statusmap-panel",
-      "useMax": true,
-      "xAxis": {
-        "labelFormat": "%a %m/%d",
-        "minBucketWidthToShowWeekends": 4,
-        "show": true,
-        "showCrosshair": true,
-        "showWeekends": true
-      },
-      "yAxis": {
-        "show": true,
-        "showCrosshair": false
-      }
-    },
-    {
-      "columns": [],
-      "datasource": "${DS_INFLUX-VMWARE}",
-      "fontSize": "120%",
-      "gridPos": {
-        "h": 10,
-        "w": 8,
-        "x": 16,
-        "y": 16
-      },
-      "hideTimeOverride": true,
-      "id": 114,
-      "interval": "",
-      "links": [],
-      "pageSize": 7,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 2,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "Virtual Machine",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "name",
-          "thresholds": [],
-          "type": "string",
-          "unit": "hertz"
-        },
-        {
-          "alias": "CPU (Hz)",
-          "colorMode": "cell",
-          "colors": [
-            "#3f6833",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": null,
-          "mappingType": 1,
-          "pattern": "cpu-usagemhz",
-          "thresholds": [
-            "5000000000",
-            "8000000000"
-          ],
-          "type": "number",
-          "unit": "hertz"
-        },
-        {
-          "alias": "Memory",
-          "colorMode": "cell",
-          "colors": [
-            "#3f6833",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": null,
-          "mappingType": 1,
-          "pattern": "mem",
-          "thresholds": [
-            "5000000",
-            "8000000"
-          ],
-          "type": "number",
-          "unit": "deckbytes"
-        },
-        {
-          "alias": "CPU (%)",
-          "colorMode": "cell",
-          "colors": [
-            "#3f6833",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": null,
-          "mappingType": 1,
-          "pattern": "cpu-usage",
-          "thresholds": [
-            "80",
-            "95"
-          ],
-          "type": "number",
-          "unit": "percent"
-        }
-      ],
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "name"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "virtualmachine",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "cpu_usage_average"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  " / 100"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "cpu-usage"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "cpu_usagemhz_average"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "*1000*1000"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "cpu-usagemhz"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "mem_active_average"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "mem"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": "2m",
-      "timeShift": null,
-      "title": "Top VM CPU/Memory Usage",
-      "transform": "table",
-      "type": "table"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1225,11 +1214,12 @@
       "datasource": "${DS_INFLUX-TELEGRAF}",
       "fill": 0,
       "gridPos": {
-        "h": 5,
-        "w": 16,
-        "x": 0,
-        "y": 21
+        "h": 6,
+        "w": 6,
+        "x": 10,
+        "y": 20
       },
+      "hideTimeOverride": true,
       "id": 112,
       "interval": "60s",
       "legend": {
@@ -1247,6 +1237,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "paceLength": 10,
       "percentage": false,
       "pointradius": 5,
@@ -1393,5 +1384,5 @@
   "timezone": "",
   "title": "TV Dashboard 1",
   "uid": "CToF9lDmz",
-  "version": 128
+  "version": 137
 }

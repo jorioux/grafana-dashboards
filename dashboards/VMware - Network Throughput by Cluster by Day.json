@@ -14,19 +14,19 @@
       "type": "panel",
       "id": "flant-statusmap-panel",
       "name": "Statusmap",
-      "version": "0.0.2"
+      "version": "0.1.1"
     },
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.0.0"
+      "version": "6.2.2"
     },
     {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
-      "version": "5.0.0"
+      "version": "1.0.0"
     }
   ],
   "annotations": {
@@ -46,14 +46,16 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1552402832547,
+  "iteration": 1560176003942,
   "links": [],
   "panels": [
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 5,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
@@ -85,6 +87,7 @@
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "repeat": "TimeShift",
       "repeatDirection": "v",
       "targets": [
@@ -162,13 +165,16 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     },
     {
       "cards": {
+        "cardHSpacing": 2,
         "cardMinWidth": 5,
         "cardRound": null,
-        "cardSpacing": 2
+        "cardSpacing": 2,
+        "cardVSpacing": 2
       },
       "color": {
         "cardColor": "#b4ff00",
@@ -200,6 +206,7 @@
       },
       "links": [],
       "nullPointMode": "as empty",
+      "options": {},
       "repeat": "TimeShift",
       "repeatDirection": "v",
       "targets": [
@@ -277,7 +284,8 @@
       "yAxis": {
         "show": true,
         "showCrosshair": false
-      }
+      },
+      "yAxisSort": "metrics"
     }
   ],
   "refresh": false,
